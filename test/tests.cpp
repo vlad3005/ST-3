@@ -57,13 +57,19 @@ TEST(TimedDoorZeroTimeout, UnlockThrowsWhenDoorRemainOpen) {
 
 TEST(TimedDoorZeroTimeout, DoorStillOpenAfterFailedUnlock) {
   TimedDoor door(0);
-  try { door.unlock(); } catch (const std::runtime_error&) {}
+  try {
+     door.unlock();
+     }
+  catch (const std::runtime_error&) {}
   EXPECT_THROW(door.throwState(), std::runtime_error);
 }
 
 TEST(TimedDoorZeroTimeout, LockAfterFailedUnlockClosesTheDoor) {
   TimedDoor door(0);
-  try { door.unlock(); } catch (const std::runtime_error&) {}
+  try {
+     door.unlock();
+     } 
+  catch (const std::runtime_error&) {}
   door.lock();
   EXPECT_NO_THROW(door.throwState());
 }
@@ -76,7 +82,10 @@ TEST(DoorTimerAdapterTest, TimeoutOnClosedDoorDoesNotThrow) {
 
 TEST(DoorTimerAdapterTest, TimeoutOnOpenDoorThrows) {
   TimedDoor door(0);
-  try { door.unlock(); } catch (const std::runtime_error&) {}
+  try {
+     door.unlock(); 
+    } 
+  catch (const std::runtime_error&) {}
   DoorTimerAdapter adapter(door);
   EXPECT_THROW(adapter.Timeout(), std::runtime_error);
 }
